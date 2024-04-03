@@ -72,7 +72,7 @@ export const items = [
         creator: 'Open-Kaito',
         name: "Open-Kaito",
         url: '',
-        description: "Subnet 5, OpenKaito, is Kaito AI's initiative to decentralize the Web3 search platform. It leverages BitTensor's Yuma consensus and AI-based nDCG evaluator for search relevance while overcoming operational challenges. The goal is to engage the public in building and benefiting from a decentralized smart search and analytics platform featuring low latency and innovative caching mechanisms on validator nodes."
+        description: "Subnet 5, OpenKaito, is Kaito AI's initiative to decentralize the Web3 search platform. It leverages Bittensor's Yuma consensus and AI-based nDCG evaluator for search relevance while overcoming operational challenges. The goal is to engage the public in building and benefiting from a decentralized smart search and analytics platform featuring low latency and innovative caching mechanisms on validator nodes."
     },
     {
         netuid: 6,
