@@ -64,7 +64,7 @@ export const items = [
         image: subnetImageFour,
         creator: 'Carro',
         name: "Multi Modality",
-        url: '',
+        url: 'multi-modality',
         description: "Subnet 4 is a leading distributed next-generation search engine that leverages machine learning to capture meaning in unstructured data, including text and images."
     },
     {
