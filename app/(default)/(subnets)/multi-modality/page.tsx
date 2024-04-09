@@ -10,7 +10,7 @@ export const metadata = {
 const MultiModalityPage = () => {
     
     return (
-        <main className="mt-[30px] my-auto mx-auto xl:w-[1400px] px-[20px] py-[50px]">
+        <main className="relative mt-[30px] my-auto mx-auto xl:w-[1400px] px-[20px] py-[50px]">
             <MultiModality/>
         </main>
     )

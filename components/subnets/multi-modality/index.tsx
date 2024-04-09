@@ -1,5 +1,6 @@
 "use client"
 import { useRef, useState, useEffect } from "react";
+import Loading from "../loading";
 
 
 
@@ -12,7 +13,7 @@ const MultiModality = () => {
     useEffect(() => {
         function handleKeyPress(event: KeyboardEvent) {
             if (event.key === 'Enter') {
-                
+                searchData();
             }
          }
          
@@ -28,9 +29,20 @@ const MultiModality = () => {
 
     }, [inputVal]);
 
+    const  searchData = async () => {
+        setLoading(true);
+        await new Promise((resolve) => setTimeout(resolve, 3000));
+        setLoading(false);
+    }
+
 
     return (
         <div className="mt-[40px]">
+            {
+                loading && (
+                    <Loading/>
+                )
+            }
             <input ref={inputRef} value={inputVal} onChange={(e) => setInputValue(e.target.value)}  disabled={loading}
                 className="w-full bg-gray-500 py-5 px-3 rounded-xl outline-none 
                     hover:bg-[#303846] focus:bg-[#303846] focus:border-primary duration-300 transition-all "
