@@ -234,7 +234,7 @@ export default function TranslateForm() {
                 </span>
               </div>
             </div>
-          </div>
+          </div>   
         </div>
         <div className="flex flex-row justify-center items-center text-center mb-4 gap-12">
               <button className="inline-block bg-white text-white px-3 py-3 rounded-full hover:bg-gray-200">
