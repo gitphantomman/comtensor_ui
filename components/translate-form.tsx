@@ -1,10 +1,10 @@
 'use client'
 import Image from 'next/image'
 
-// import FeatImage01 from '@/public/images/features-03-image-01.png'
-// import Dropdown from '@/components/utils/dropdown'
-// import FeatImage02 from '@/public/images/features-03-image-02.png'
-// import FeatImage03 from '@/public/images/features-03-image-03.png'
+import FeatImage01 from '@/public/images/features-03-image-01.png'
+import Dropdown from '@/components/utils/dropdown'
+import FeatImage02 from '@/public/images/features-03-image-02.png'
+import FeatImage03 from '@/public/images/features-03-image-03.png'
 import axios from 'axios'
 import { useState, useEffect } from 'react';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
@@ -14,7 +14,7 @@ import HistoryIcon from '@mui/icons-material/History';
 import StarsIcon from '@mui/icons-material/Stars';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import { CircularProgress } from '@mui/material'
-
+// import Textarea from './LabTabs'
 export default function TranslateForm() {
 
   const maxCharacters = 5000;
@@ -29,26 +29,20 @@ export default function TranslateForm() {
   const languages: any = {
     "English": "en",
     "Chinese": "zh",
-    "Spainish": "es",
     "French": "fr",
-    "German": "de",
     "Italian": "it",
     "Korean": "ko",
     "Polish": "pl",
     "Portuguese": "pt",
     "Russian": "ru",
     "Spanish": "es",
-    "Swedish": "sv",
-    "Turkish": "tr",
-    "Vietnamese": "vi",
     "Chinese Simplified": "zh-CN",
     "Chinese Traditional": "zh-TW",
-    "Japanese": "ja",
   }
 
   const characterCount = inputText.length;
-  const tranCharacterCount = outputText.length;
-  const remainingCharacters = maxCharacters - characterCount;
+  // const tranCharacterCount = outputText.length;
+  // const remainingCharacters = maxCharacters - characterCount;
 
   const selectTargetLanguage = (language: any) => {
     console.log(languages[language]);
@@ -87,9 +81,23 @@ export default function TranslateForm() {
       });
     // return ''
   };
+  const swapLang  = () => {
+    setSourceLang(targetLang);
+    setTargetLang(sourceLang);
+  }
+  const swapText = () => {
+    const temp = inputText;
+    setInputText(outputText);
+    setOutputText(temp);
+  }
   useEffect(() => {
     const handler = setTimeout(() => {
-      translateText(inputText, sourceLang, targetLang);
+      if (inputText.length === 0) {
+        setOutputText('');
+      } else {
+        setOutputText(outputText);
+        translateText(inputText, sourceLang, targetLang);
+      }
     }, 1000);
     return () => {
       clearTimeout(handler);
@@ -101,9 +109,8 @@ export default function TranslateForm() {
     <section>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="py-12 md:py-20 border-t border-gray-800">
-          {/* Section header */}
+
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-            {/* <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-green-600 bg-green-200 rounded-full mb-4">{Object.keys(languages).find((key) => languages[key] === sourceLang)} to {Object.keys(languages).find((key) => languages[key] === targetLang)}</div> */}
             <h1 className="h2 mb-4">Translator powered by ComTensor</h1>
             <p className="text-xl text-gray-400">Version 1.0.</p>
           </div>
@@ -114,16 +121,15 @@ export default function TranslateForm() {
             </div>
             <p className="text-xl text-gray-400"></p>
           </div>
-          {/* Items */}
+
           <div className="flex lg:flex-row xl:flex-row gap-4 p-1 md:flex-col sm:flex-col md:mx-auto sm:mx-auto max-w-xl mx-auto items-center justify-center">
             <div className="flex flex-col space-y-4">
               <div className="relative md:w-full">
-                {/* <Textarea /> */}
                 <button
                   id="dropdownHoverButton"
                   onMouseEnter={() => setIsSourceOpen(true)}
                   onMouseLeave={() => setIsSourceOpen(false)}
-                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  className="text-white bg-gray-300 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   type="button"
                 >
                   {Object.keys(languages).find((key) => languages[key] === sourceLang)}
@@ -166,20 +172,17 @@ export default function TranslateForm() {
                   {characterCount} / {maxCharacters}
                 </span>
               </div>
-              <div className="text-right text-gray-500">
-                <span className="text-sm">
-                  {remainingCharacters} / {maxCharacters}
-                </span>
-              </div>
             </div>
             <div className="text-center">
-              <button className="inline-block bg-white text-white px-3 py-3 rounded-full hover:bg-gray-200">
-                <SwapHorizIcon color='primary' />
+              <button className="inline-block bg-white text-white px-3 py-3 rounded-full hover:bg-gray-200" onClick={() => {
+                swapLang();
+                swapText();
+              }}>
+                <SwapHorizIcon color='primary'/>
               </button>
             </div>
             <div className="flex flex-col space-y-4">
               <div className="relative md:w-full">
-                {/* <Textarea /> */}
                 <button
                   id="dropdownHoverButton"
                   onMouseEnter={() => setIsTargetOpen(true)}
@@ -220,14 +223,15 @@ export default function TranslateForm() {
                 placeholder="Translation will appear here"
                 value={outputText}
                 readOnly
+                style={{ whiteSpace: 'pre-wrap' }}
               />
                <div className="text-right text-gray-500">
                 <span className="text-sm">
                   Translation
-                </span>
-              </div>
-            </div>
-          </div>
+                </span>   
+              </div>    
+            </div>      
+          </div>   
         </div>
         <div className="flex flex-row justify-center items-center text-center mb-4 gap-12">
               <button className="inline-block bg-white text-white px-3 py-3 rounded-full hover:bg-gray-200">
