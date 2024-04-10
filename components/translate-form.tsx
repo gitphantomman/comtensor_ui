@@ -109,9 +109,8 @@ export default function TranslateForm() {
     <section>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="py-12 md:py-20 border-t border-gray-800">
-          {/* Section header */}
+
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-            {/* <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-green-600 bg-green-200 rounded-full mb-4">{Object.keys(languages).find((key) => languages[key] === sourceLang)} to {Object.keys(languages).find((key) => languages[key] === targetLang)}</div> */}
             <h1 className="h2 mb-4">Translator powered by ComTensor</h1>
             <p className="text-xl text-gray-400">Version 1.0.</p>
           </div>
@@ -122,11 +121,10 @@ export default function TranslateForm() {
             </div>
             <p className="text-xl text-gray-400"></p>
           </div>
-          {/* Items */}
+
           <div className="flex lg:flex-row xl:flex-row gap-4 p-1 md:flex-col sm:flex-col md:mx-auto sm:mx-auto max-w-xl mx-auto items-center justify-center">
             <div className="flex flex-col space-y-4">
               <div className="relative md:w-full">
-                {/* <Textarea /> */}
                 <button
                   id="dropdownHoverButton"
                   onMouseEnter={() => setIsSourceOpen(true)}
@@ -185,7 +183,6 @@ export default function TranslateForm() {
             </div>
             <div className="flex flex-col space-y-4">
               <div className="relative md:w-full">
-                {/* <Textarea /> */}
                 <button
                   id="dropdownHoverButton"
                   onMouseEnter={() => setIsTargetOpen(true)}
