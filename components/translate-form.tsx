@@ -231,9 +231,9 @@ export default function TranslateForm() {
                <div className="text-right text-gray-500">
                 <span className="text-sm">
                   Translation
-                </span>
-              </div>
-            </div>
+                </span>   
+              </div>    
+            </div>      
           </div>   
         </div>
         <div className="flex flex-row justify-center items-center text-center mb-4 gap-12">
