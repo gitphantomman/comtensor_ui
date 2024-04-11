@@ -44,7 +44,6 @@ const MultiModality = () => {
                inputElement.removeEventListener('keypress', handleKeyPress);
             };
          }
-
     }, [inputVal]);
 
     const  searchData = async () => {
