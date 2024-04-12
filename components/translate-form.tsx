@@ -74,7 +74,6 @@ export default function TranslateForm() {
       .then((response: any) => {
         console.log(response.data[0].translated_texts[0]);
         setOutputText(response.data[0].translated_texts[0])
-        // return response.data[0].translated_texts[0];
       })
       .catch((error: any) => {
         console.error(error);
@@ -129,7 +128,7 @@ export default function TranslateForm() {
                   id="dropdownHoverButton"
                   onMouseEnter={() => setIsSourceOpen(true)}
                   onMouseLeave={() => setIsSourceOpen(false)}
-                  className="text-white bg-gray-300 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   type="button"
                 >
                   {Object.keys(languages).find((key) => languages[key] === sourceLang)}
