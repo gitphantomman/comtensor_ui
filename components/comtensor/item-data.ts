@@ -1,5 +1,5 @@
 import subnetImageOne from '@/public/images/subnets/subnet-1-banner.webp';
-import subnetImageTwo from '@/public/images/subnets/subnet-2-banner.webp';
+import subnetImageTwo from '@/public/images/subnets/coming-soon.webp';
 import subnetImageThree from '@/public/images/subnets/subnet-3-banner.webp';
 import subnetImageFour from '@/public/images/subnets/subnet-4-banner.webp';
 import subnetImageFive from '@/public/images/subnets/subnet-5-banner.webp';
@@ -43,13 +43,21 @@ export const items = [
         description: "Subnet 1 in the Bittensor network is dedicated to incentivizing the development of conversational intelligence on an internet scale. It serves as a platform for advancing AI communication technologies, where participants are rewarded for their contributions towards this goal. This subnet plays a crucial role in Bittensor’s decentralized AI service ecosystem, fostering innovation and engagement in the field of AI-driven conversations."
 
     },
+    // {
+    //     netuid: 2,
+    //     image: subnetImageTwo,
+    //     creator: 'Lucrosus Capital',
+    //     name: "Machine Translation",
+    //     url: 'translate',
+    //     description: "BitTranslate is a subnet that rewards high-quality translations. Validators generate unique text using a multilingual text generation model. The text is then passed to Miners, who utilize a text-to-text model to create a translation. The validator then assesses the translated outputs using two Reward Models based on methodologies from academic papers."
+    // },
     {
         netuid: 2,
         image: subnetImageTwo,
-        creator: 'Lucrosus Capital',
-        name: "Machine Translation",
-        url: 'translate',
-        description: "BitTranslate is a subnet that rewards high-quality translations. Validators generate unique text using a multilingual text generation model. The text is then passed to Miners, who utilize a text-to-text model to create a translation. The validator then assesses the translated outputs using two Reward Models based on methodologies from academic papers."
+        creator: 'gagichce',
+        name: "Omron",
+        url: '',
+        description: "Omron subnet, building cryptographically verified efficient and intelligent capital networks. By leveraging cryptographically verified trustless protocol and AI models to analyze data and direct liquidity across various EigenLayer AVS for optimal yields."
     },
     {
         netuid: 3,
