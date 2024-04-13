@@ -288,7 +288,7 @@ export const items = [
         image: subnetImageThirtyTwo,
         creator: 'bthealthcare',
         name: "Its-AI",
-        url: '',
+        url: 'its_AI',
         description: "Our subnet focuses on AI-generated content detection. Given the rapid growth of LLM-generated text, such as ChatGPT, which outputs 100 billion words per day compared to 100 trillion words for humans, we believe that the ability to accurately identify AI-generated text will become increasingly necessary."
     },
 ];
