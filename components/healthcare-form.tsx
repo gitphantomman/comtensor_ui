@@ -5,6 +5,11 @@ import FeatImage01 from '@/public/images/features-03-image-01.png'
 import Dropdown from '@/components/utils/dropdown'
 import FeatImage02 from '@/public/images/features-03-image-02.png'
 import FeatImage03 from '@/public/images/features-03-image-03.png'
+
+import { styled } from '@mui/material/styles'
+import Button from '@mui/material/Button'
+import CloudUploadIcon from '@mui/icons-material/CloudUpload'
+
 import axios from 'axios'
 import { useState, useEffect, ChangeEvent, DragEvent, FormEvent } from 'react';
 export default function HealthcareForm() {
@@ -42,6 +47,19 @@ export default function HealthcareForm() {
       // You can call an upload function here
     }
   };
+
+  const VisuallyHiddenInput = styled('input')({
+    clip: 'rect(0 0 0 0)',
+    clipPath: 'inset(50%)',
+    height: 1,
+    overflow: 'hidden',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    whiteSpace: 'nowrap',
+    width: 1,
+  });
+
   const uploadFile = async () => {
     console.log(file)
     if (file) {
@@ -91,7 +109,16 @@ export default function HealthcareForm() {
                     lineHeight: '180px',
                   }}
                 >
-                  Drag and drop files here
+                  <Button className='flex justify-center items-center'
+                    component="label"
+                    role={undefined}
+                    variant="contained"
+                    tabIndex={-1}
+                    startIcon={<CloudUploadIcon />}
+                  >
+                    Upload file
+                    <VisuallyHiddenInput type="file" />
+                  </Button>
                 </div>
               )}
               {imagePreviewUrl && (
