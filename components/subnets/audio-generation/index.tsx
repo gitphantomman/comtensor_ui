@@ -15,7 +15,6 @@ const Audio_generation = () => {
           <a href="#" className="inline-flex justify-between items-center py-1 px-1 mb-7 text-sm text-gray-700 bg-gray-100 rounded-full dark:bg-pink-800 drop-shadow-md dark:text-white hover:bg-gray-200 dark:hover:bg-pink-700" role="alert">
             <img src="assets/subnet16.png" className="rounded-full w-48"></img>
           </a>
-
           <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl dark:text-white">Audio Generation by powered Comtensor</h1>
           <p className="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Enter prompt to generate your own audio.</p>
           <div className="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48">
@@ -31,8 +30,7 @@ const Audio_generation = () => {
               <label htmlFor="
               ">Upload</label>
               <input type="file" className="hidden" />
-            </a>
-           
+            </a>           
           </div>
         </div>
         <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">

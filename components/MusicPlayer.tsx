@@ -47,7 +47,6 @@ const MusicPlayer: FC<MusicPlayerProps> = ({ className, title_pro, duration, isP
               width="50%"
             />
           </div>
-
           <div className="flex flex-col col-span-6 md:col-span-8">
             <div className="flex justify-between items-start">
               <div className="flex flex-col gap-0">
