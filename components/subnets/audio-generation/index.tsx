@@ -5,7 +5,7 @@ import axios from "axios";
 import { PlayArrow } from "@mui/icons-material";
 import { DetailsRounded } from "@mui/icons-material";
 import MusicPlayer from "@/components/MusicPlayer";
-import { UploadFile} from '@mui/icons-material';
+import { UploadFile } from '@mui/icons-material';
 
 const Audio_generation = () => {
   return (
@@ -30,7 +30,7 @@ const Audio_generation = () => {
               <label htmlFor="
               ">Upload</label>
               <input type="file" className="hidden" />
-            </a>           
+            </a>
           </div>
         </div>
         <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
@@ -60,6 +60,51 @@ const Audio_generation = () => {
             </div>
           </div>
         </div>
+
+        <div className="w-full h-[500px] xl:h-[415px] md:h-[204px] h-[370px] flex flex-col items-center justify-evenly mb-1" style={{ backgroundColor: '#151719' }}>
+          <div className="text-center flex items-center justify-center relative">
+            <h1 className="mb-1 font-bold text-[#95ADBD] opacity-10 font-[&#x27;Poppins&#x27;] 2xl:text-9xl xl:text-[112px] md:text-6xl md:text-5xl lg:text-6xl text-3xl">Whaaaaaat?</h1>
+            <h3 className="text-[#5d5dff] font-bold font-[&#x27;Poppins&#x27;] 2xl:text-7xl xl:text-[64px] md:text-4xl lg:text-6xl text-lg absolute">
+              What is the Audio Generation?
+            </h3>
+          </div>
+          <ul className="md:pt-28 pt-8 w-3/4 m-auto">
+            <li className="list-disc text-white font-medium font-[&#x27;Poppins&#x27;] pb-12 xl:text-2xl md:text-lg text-sm"> This subnetwork is a decentralized system designed for text-to-audio applications within the Bittensor network.Converts text into immersive audio. Initially offering text-to-speech, with upcoming features to blend music into audio creations.</li>
+            <li className="list-disc text-white font-medium font-[&#x27;Poppins&#x27;] pb-12 xl:text-2xl md:text-lg text-sm"> The Comtensor Audio Generation subnetwork distinguishes itself from big tech centralized counterparts, such as OpenAI and Google, by offering a unified, decentralized platform that unifies all key audio generation services: Text-to-Speech, Voice Cloning, and Text-to-Music.This ensures users have access to all audio services in one place.</li>
+          </ul>
+        </div>
+        <div className="w-full mt-[160px]" style={{ backgroundColor: '#151719' }}>
+          <div className="xl:h-[160px] md:h-[80px] h-[40px] z-10 flex flex-col items-center justify-center rounded-xl">
+            <h1 className="text-[#5d5dff] font-bold font-[&#x27;Poppins&#x27;] 2xl:text-7xl xl:text-[64px] md:text-4xl text-lg">
+              <span className="text-[#5d5dff]">Mission</span>
+            </h1>
+          </div>
+          <ul className="md:pt-28 pt-8 w-3/4 m-auto">
+            <li className="list-disc text-white font-medium font-[&#x27;Poppins&#x27;] pb-12 xl:text-2xl md:text-lg text-sm"> The main goal of the Comtensor Audio Generation is to establish a decentralized platform that incentivizes the creation, distribution and also monetization of AI audio content, such as:</li>
+            <li className="list-disc text-white font-medium font-[&#x27;Poppins&#x27;] pb-12 xl:text-2xl md:text-lg text-sm"> Text-to-Speech (TTS)</li>
+            <li className="list-disc text-white font-medium font-[&#x27;Poppins&#x27;] pb-12 xl:text-2xl md:text-lg text-sm"> Voice Cloning (VC)</li>
+            <li className="list-disc text-white font-medium font-[&#x27;Poppins&#x27;] pb-12 xl:text-2xl md:text-lg text-sm"> Text-to-Music (TTM)</li>
+            <li className="list-disc text-white font-medium font-[&#x27;Poppins&#x27;] pb-12 xl:text-2xl md:text-lg text-sm"> By introducing audio generation services such as Text-to-Speech, Voice Cloning, and Text-to-Music, this subnetwork expands the range of available services within the Comtensor ecosystem. This diversification enhances the utility and appeal of the Comtensor platform to a broader audience, including creators, influencers, developers, and end-users interested in audio content.</li>
+          </ul>
+          {/* <div className="w-full pb-4 rounded-xl">
+            <div className=" z-10 xl:w-4/5 w-full m-auto">
+              <div className="text-center flex items-center justify-start relative">
+                <h2 className="font-bold text-[#95ADBD] opacity-10 font-[&#x27;Poppins&#x27;] 2xl:text-9xl xl:text-[112px] md:text-6xl text-3xl">What is the Open-Kaito</h2>
+                <h3 className="text-[#95ADBD] font-bold font-[&#x27;Poppins&#x27;] 2xl:text-7xl xl:text-6xl md:text-4xl text-lg absolute text-left md:pt-20 pt-6 md:pl-12 pl-6">
+                  <span className="text-[#5d5dff]">What</span>
+                  <span className="text-[#5d5dff]">&nbsp;is the Open-Kaito</span><span className="text-[#5d5dff]">?</span>
+                </h3>
+              </div>
+            </div>
+            <ul className="md:pt-28 pt-8 w-3/4 m-auto">
+              <li className="list-disc text-white font-medium font-[&#x27;Poppins&#x27;] pb-12 xl:text-2xl md:text-lg text-sm"> OpenKaito, is Kaito AI's initiative to decentralize the Web3 search platform.</li>
+              <li className="list-disc text-white font-medium font-[&#x27;Poppins&#x27;] pb-12 xl:text-2xl md:text-lg text-sm"> It leverages Bittensor's Yuma consensus and AI-based nDCG</li>
+              <li className="list-disc text-white font-medium font-[&#x27;Poppins&#x27;] pb-12 xl:text-2xl md:text-lg text-sm"> evaluator for search relevance while overcoming operational challenges. </li>
+              <li className="list-disc text-white font-medium font-[&#x27;Poppins&#x27;] pb-12 xl:text-2xl md:text-lg text-sm"> The goal is to engage the public in building and benefiting from a decentralized smart search and analytics platform featuring low latency and innovative caching mechanisms on validator nodes.</li>
+            </ul>
+          </div> */}
+        </div>
+
       </section>
     </div>
   )
