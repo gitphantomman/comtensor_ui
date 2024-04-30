@@ -1,13 +1,10 @@
 "use client"
-import { useRef, useState, useEffect } from "react";
-import Spinner from "../Spinner";
-import axios from "axios";
 import { PlayArrow } from "@mui/icons-material";
 import { DetailsRounded } from "@mui/icons-material";
 import MusicPlayer from "@/components/MusicPlayer";
 import { UploadFile } from '@mui/icons-material';
 
-const Audio_generation = () => {
+const Audio_generation = (title_pro:String, duration:number) => {
   return (
     <div className="mt-[90px]">
       <section className="bg-transparent dark:bg-gray-900">

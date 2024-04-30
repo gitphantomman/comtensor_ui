@@ -184,7 +184,7 @@ export const items = [
         image: subnetImageEighteen,
         creator: 'Mog',
         name: "Cortex.t",
-        url: '',
+        url: 'cortex',
         description: "Cortex.t, is a leading AI development and synthetic data generation platform designed to support app developers and AI innovators with high-quality text and image responses through a decentralized network. It aims to create a fair and transparent environment for the incentivized production of intelligence and the fulfillment of diverse user prompts. Cortex.t uses advanced AI models to generate synthetic prompt-response pairs, facilitating the development of smaller, efficient AI models that retain the capabilities of their larger counterparts. This approach addresses the challenges of data collection and curation, enabling the rapid development of robust and adaptable AI models. By offering tools like SynthPairPro, Cortex.t democratizes access to high-end AI technology, encouraging innovation and customization in the AI field."
     },
     {
@@ -192,7 +192,7 @@ export const items = [
         image: subnetImageNineteen,
         creator: 'Namoray',
         name: "Vision",
-        url: '',
+        url: 'vision',
         description: "Subnet 19 is the Bittensor subnetwork, initially focusing on image creation and manipulation models and inference at scale."
     },
     {
