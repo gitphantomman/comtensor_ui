@@ -14,19 +14,10 @@ import AudioFileRounded from "@mui/icons-material/AudioFileRounded";
 
 export interface MusicPlayerProps extends CardProps {
   title_pro: string;
-  progress: string;
-  album: string;
-  image: string;
   duration: number;
-  currentTime: number;
-  isPlaying: boolean;
-  onPlay: () => void;
-  onPause: () => void;
-  onPrevious: () => void;
-  onNext: () => void;
 }
 
-const MusicPlayer: FC<MusicPlayerProps> = ({ className, title_pro, duration, isPlaying, ...otherProps }) => {
+const MusicPlayer: FC<MusicPlayerProps> = ({ className, title_pro, duration }) => {
   const [liked, setLiked] = useState(false);
   const [isPlay, setPlay] = useState(true);
 
@@ -35,18 +26,20 @@ const MusicPlayer: FC<MusicPlayerProps> = ({ className, title_pro, duration, isP
       isBlurred
       className={clsx("border-none bg-background/60 dark:bg-default-100/50", className)}
       shadow="sm"
-      {...otherProps}
     >
       <CardBody>
         <div className="grid grid-cols-6 md:grid-cols-12 gap-6 md:gap-4 items-center justify-center">
           <div className="relative col-span-6 md:col-span-4">
-            <img
+            <Image
               alt="Album cover"
               className="object-cover shadow-black/20"
-              src="images/comlogo.png"
+              height={100}
+              shadow="lg"
+              src="images/com-logo.png"
               width="50%"
             />
           </div>
+
           <div className="flex flex-col col-span-6 md:col-span-8">
             <div className="flex justify-between items-start">
               <div className="flex flex-col gap-0">
