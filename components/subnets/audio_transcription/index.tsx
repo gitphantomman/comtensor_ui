@@ -1,25 +1,17 @@
 "use client"
-import axios from 'axios';
 import React from 'react';
 import { styled } from '@mui/material/styles';
 import { useRef, useState, useEffect } from "react";
-import { Key, PlayArrow } from "@mui/icons-material";
-import { UploadFile } from '@mui/icons-material';
 import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
-import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 import MicNoneIcon from '@mui/icons-material/MicNone';
 import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
 import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite';
-import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import StopCircleIcon from '@mui/icons-material/StopCircle';
 import PauseCircleFilledIcon from '@mui/icons-material/PauseCircleFilled';
-import { Shizuru } from "next/font/google";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { Button, List, ListItem, ListItemText } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-
-
 
 const Audio_transcription = () => {
   const [isRecording, setRecording] = useState(false);
@@ -27,12 +19,12 @@ const Audio_transcription = () => {
   const [progress, setProgress] = useState(0);
   const [buffer, setBuffer] = useState(10);
   const progressRef = useRef<number | null>(null);
-  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
-  // Handle file selection
-  const handleFileChange = (event) => {
-    const fileList = event.target.files;
-    setSelectedFiles([...fileList]);
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setSelectedFiles([...e.target.files]);
+    }
   };
 
   useEffect(() => {
@@ -47,16 +39,22 @@ const Audio_transcription = () => {
         });
       }, 500);
     } else {
-      clearInterval(progressRef.current);
+      if (progressRef.current !== null) {
+        clearInterval(progressRef.current);
+        progressRef.current = null;
+      }
     }
     return () => {
-      clearInterval(progressRef.current);
+      if (progressRef.current !== null) {
+        clearInterval(progressRef.current);
+        progressRef.current = null;
+      }
     };
   }, [isRecording, isPlaying]);
 
   const handleRecordingToggle = () => {
     setRecording((prevState) => !prevState);
-    // setPlaying((prevState) => !prevState);
+    setPlaying((prevState) => !prevState);
   };
 
   const handleStopRecording = () => {
