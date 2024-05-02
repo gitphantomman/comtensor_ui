@@ -14,5 +14,4 @@ const Audio_Transcription = () => {
     )
 }
 
-
 export default Audio_Transcription;
