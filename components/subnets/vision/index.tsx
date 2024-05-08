@@ -1,132 +1,177 @@
 "use client"
-import Link from 'next/link';
+
 import React, { useState } from 'react';
-import { FaUpload, FaPlay, FaRedo } from 'react-icons/fa'
-import NoImageUploaded from './NoImageUploaded';
-import ImageItem from './ImageItem';
+import axios from 'axios';
+import Spinner from '../Spinner';
+
+
+type FormEventHandler<T> = (event: React.FormEvent<T>) => void;
 
 const Vison = () => {
-  const [uploadedImage, setUploadedImage] = useState<string | null>(null); 
-  const [imageList, setImageList] = useState<string[]>([]); 
+
+  const [uploadedImageBuffer, setUploadedImageBuffer] = useState<ArrayBuffer | null>(null);
+  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+  const [inputValue, setInputValue] = useState('');
+  const [responseData, setResponseData] = useState('');
+  const [loading, setLoading] = useState<boolean>(false);
+  const [selectedMode, setSelectedMode] = useState<"txt2img" | "img2img">("txt2img");
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
+
       reader.onload = (e) => {
-        const result = e.target?.result as string;
-        setUploadedImage(result);
-        setImageList((prevList) => [...prevList, result]);
+        if (e.target) {
+          const result = e.target.result as ArrayBuffer;
+          setUploadedImageBuffer(result); // Store the buffer data
+        }
       };
-      reader.readAsDataURL(file);
+
+      reader.readAsArrayBuffer(file); // Read the file as a buffer
     }
   };
 
-  const handleReset = () => {
-    setUploadedImage(null);
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+    console.log(inputValue);
   };
 
-  const handleAnalyze = () => {
-    alert("Analyze button clicked"); 
+  const handleFormSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+
+    let apiData;
+    if (selectedMode === 'txt2img') {
+      apiData = {
+        type: 'txt2img',
+        prompt: inputValue,
+      };
+    } else if (selectedMode === 'img2img') {
+      const base64Image = Buffer.from(uploadedImageBuffer!).toString("base64");
+      apiData = {
+        type: 'img2img',
+        prompt: inputValue,
+        init_image : base64Image
+      };
+    }
+
+    try {
+      await axios.post(
+        'https://api.comtensor.io/vision/',
+        apiData,
+        {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+        .then(response => {
+          const data = response.data.signed_urls;
+          setResponseData(data);
+          setLoading(false);
+        })
+        .catch(error => {
+          setLoading(false);
+          console.error('Error sending POST request:', error);
+        });
+
+    } catch (error) {
+      setLoading(false);
+      console.error('Error sending POST request:', error);
+    }
   };
 
   return (
-    <div className="min-h-screen flex flex-col transparent border border-gray-100">
-      <header className="bg-blue-600 text-white p-4 flex justify-between items-center">
-        <div className="flex items-center transparent">
-          <img src="images/comlogo.png" alt="Logo" className="h-8 w-8 mr-2 rounded-full" />
-          <h1 className="text-xl font-bold">Subnet 19 Vison</h1>
-        </div>
-        <nav>
-          <ul className="flex space-x-4">
-            <li>
-              <Link href="/" className="hover:text-blue-200">Comtensor list</Link>
-            </li>
-            <li>
-              <Link href="/upload" className="hover:text-blue-200">Upload</Link>
-            </li>
-            <li>
-              <Link href="/tools" className="hover:text-blue-200">Tools</Link>
-            </li>
-          </ul>
-        </nav>
-      </header>
+    <div className="min-h-screen flex flex-col transparent">
+      <div className="flex items-center transparent justify-center mt-12">
+        <img src="images/subnets/subnet-19.webp" alt="Logo" className="w-60 h-60 rounded-full" />
+      </div>
       <main className="flex flex-grow">
-        <aside className="w-1/4 p-4 transparent">
+        <aside className="w-1/4 p-4 transparent mt-12">
           <ul className="space-y-2">
-            <li><button className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Recognition</button></li>
-            <li><button className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Embeddings</button></li>
-            <li><button className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Object Detection</button></li>
-            <li><button className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Segmentation</button></li>
+            <li>
+              <button
+                className={`w-full ${selectedMode === "txt2img" ? "bg-pink-900" : "bg-pink-600"
+                  } text-white p-2 rounded`}
+                onClick={() => setSelectedMode("txt2img")}
+              >
+                Text to Image
+              </button>
+            </li>
+            <li>
+              <button
+                className={`w-full ${selectedMode === "img2img" ? "bg-pink-900" : "bg-pink-600"
+                  } text-white p-2 rounded`}
+                onClick={() => setSelectedMode("img2img")}
+              >
+                Image to Image
+              </button>
+            </li>
           </ul>
         </aside>
-        <section className="w-3/4 p-4">
-          <h2 className="font-bold text-lg text-black">Uploaded Images</h2>
-          <div className="grid grid-cols-3 gap-4">
-            {uploadedImage ? (
-              <div className="bg-white p-4 rounded-lg shadow-md flex flex-col items-center ">
-                <img
-                  src={uploadedImage}
-                  alt="Uploaded Image"
-                  className="w-64 h-64 object-cover rounded mb-4"
-                />
-                <div className="flex space-x-4">
-                  <button
-                    onClick={handleAnalyze}
-                    className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-                  >
-                    <FaPlay className="inline mr-2" /> Analyze
-                  </button>
-                  <button
-                    onClick={handleReset}
-                    className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-                  >
-                    <FaRedo className="inline mr-2" /> Reset
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <NoImageUploaded /> 
-            )}
-
-            <div className="mt-4">
-              <label
-                htmlFor="upload" 
-                className="inline-flex items-center bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 cursor-pointer"
-              >
-                <FaUpload className="mr-2" />
-                Upload Image
-              </label>
-
-              <input
-                id="upload"
-                type="file"
-                accept="image/*"
-                onChange={handleFileChange}
-                className="hidden"
-              />
-            </div>
-            <br />
-            <h2 className="text-lg font-bold mb-4 text-black px-8">Uploaded Images List</h2>
+        <form className="w-3/4 p-4" onSubmit={handleFormSubmit}>
+          <h2 className="font-bold text-lg text-white dark:text-black">
+            {selectedMode === "txt2img" ? "Text to Image" : "Image to Image"}
+          </h2>
+          {selectedMode === "txt2img" ? (
             <div className="grid grid-cols-1 gap-4">
-              <div className='space-y-4'>
-                {imageList.map((image, index) => (
-                  <ImageItem
-                    key={index}
-                    src={image}
-                    alt={`Uploaded Image ${index}`}
-                  />
-                ))}
+              <div className="flex flex-row mt-4 text-black dark:text-white space-x-12">
+                <input
+                  id="prompt"
+                  type="text"
+                  onChange={handleInputChange}
+                  className="w-3/5 px-4 py-4 rounded-xl bg-gray-100 border"
+                />
+                <button
+                  type="submit"
+                  className="px-2 py-4 w-1/4 rounded-xl bg-pink-800 hover:bg-pink-700"
+                >
+                  Generate(txt2img)
+                </button>
               </div>
             </div>
+          ) : (
+            <div className="flex flex-col space-y-4">
+              <div className="mt-4 text-black dark:text-white space-x-12">
+                <input
+                  type="file"
+                  onChange={handleFileChange}
+                  className="w-full px-4 py-4 rounded-xl transparent border"
+                />
+              </div>
+              <div className="mt-4 text-black dark:text-black space-x-12">
+                <input
+                  id="prompt"
+                  type="text"
+                  onChange={handleInputChange}
+                  className="w-full py-4 rounded-xl transparent border bg-gray-100"
+                />
+              </div>
+              <div>
+                <button
+                  type="submit"
+                  className="px-2 py-4 w-1/4 rounded-xl bg-pink-800 hover:bg-pink-700"
+                >
+                  Generate(img2img)
+                </button>
+              </div>
+            </div>
+          )}
+          <br />
+          <h2 className="text-lg font-bold mb-4 text-white px-8 dark:text-black">Result Image</h2>
+          <div className="justify-center items-center">
+            {
+              loading ? (<Spinner />) :
+                (
+                  <img src={responseData} className='w-3/5 rounded-sm ring-1' />
+                )
+            }
           </div>
-        </section>
+        </form>
       </main>
-      <footer className="bg-gray-800 text-white p-4 text-center">
-        <p>© 2024 Image Analysis Tool. All rights reserved.</p>
-        <p>Support | Documentation | Contact Us</p>
-      </footer>
-    </div>
+    </div >
   );
 }
 
