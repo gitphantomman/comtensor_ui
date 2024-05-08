@@ -1,5 +1,5 @@
 import subnetImageOne from '@/public/images/subnets/subnet-1-banner.webp';
-import subnetImageTwo from '@/public/images/subnets/coming-soon.webp';
+import subnetImageTwo from '@/public/images/subnets/subnet-2-banner.webp';
 import subnetImageThree from '@/public/images/subnets/subnet-3-banner.webp';
 import subnetImageFour from '@/public/images/subnets/subnet-4-banner.webp';
 import subnetImageFive from '@/public/images/subnets/subnet-5-banner.webp';
@@ -14,7 +14,7 @@ import subnetImageThirteen from '@/public/images/subnets/subnet-13-banner.webp';
 import subnetImageFourteen from '@/public/images/subnets/subnet-14-banner.webp';
 import subnetImageFifteen from '@/public/images/subnets/subnet-15-banner.webp';
 import subnetImageSixteen from '@/public/images/subnets/subnet-16-banner.webp';
-import subnetImageSeventeen from '@/public/images/subnets/subnet-17-banner.webp';
+import subnetImageSeventeen from '@/public/images/subnets/subnet-17-banner.jpg';
 import subnetImageEighteen from '@/public/images/subnets/subnet-18-banner.webp';
 import subnetImageNineteen from '@/public/images/subnets/subnet-19-banner.webp';
 import subnetImageTwenty from '@/public/images/subnets/subnet-20-banner.webp';
@@ -43,21 +43,13 @@ export const items = [
         description: "Subnet 1 in the Bittensor network is dedicated to incentivizing the development of conversational intelligence on an internet scale. It serves as a platform for advancing AI communication technologies, where participants are rewarded for their contributions towards this goal. This subnet plays a crucial role in Bittensor’s decentralized AI service ecosystem, fostering innovation and engagement in the field of AI-driven conversations."
 
     },
-    // {
-    //     netuid: 2,
-    //     image: subnetImageTwo,
-    //     creator: 'Lucrosus Capital',
-    //     name: "Machine Translation",
-    //     url: 'translate',
-    //     description: "BitTranslate is a subnet that rewards high-quality translations. Validators generate unique text using a multilingual text generation model. The text is then passed to Miners, who utilize a text-to-text model to create a translation. The validator then assesses the translated outputs using two Reward Models based on methodologies from academic papers."
-    // },
     {
         netuid: 2,
         image: subnetImageTwo,
-        creator: 'gagichce',
-        name: "Omron",
-        url: '',
-        description: "Omron subnet, building cryptographically verified efficient and intelligent capital networks. By leveraging cryptographically verified trustless protocol and AI models to analyze data and direct liquidity across various EigenLayer AVS for optimal yields."
+        creator: 'Lucrosus Capital',
+        name: "Machine Translation",
+        url: 'translate',
+        description: "BitTranslate is a subnet that rewards high-quality translations. Validators generate unique text using a multilingual text generation model. The text is then passed to Miners, who utilize a text-to-text model to create a translation. The validator then assesses the translated outputs using two Reward Models based on methodologies from academic papers."
     },
     {
         netuid: 3,
@@ -118,10 +110,10 @@ export const items = [
     {
         netuid: 10,
         image: subnetImageTen,
-        creator: 'Open Tensor',
-        name: "Map Reduce",
+        creator: 'Apollo ZK',
+        name: "Apollo ZK",
         url: '',
-        description: "Bittensor Subnet 10, or Map Reduce Subnet, rewards miners for contributing network bandwidth and memory resources. It uses a broadcast system to distribute large files across multiple peers, reducing the need for high individual upload capacity. The network operates in two modes: 'map' mode, which distributes data among peers, and 'reduce' mode, which aggregates and returns data. This efficient process is key to training distributed machine learning models, optimizing both speed and consistency."
+        description: " Zero-Knowledge Proofs (ZKPs) are used to validate transactions, compute state changes, and create a proof for the blockchain, enhancing transaction throughput significantly. Nodes verify transactions by proof-checking rather than re-execution. This collaborative miner network focuses on pooling resources to efficiently generate ZKPs, with scalability directly tied to miner participation."
     },
     {
         netuid: 11,
@@ -166,18 +158,18 @@ export const items = [
     {
         netuid: 16,
         image: subnetImageSixteen,
-        creator: 'UncleTed',
-        name: "Audio Generation",
-        url: 'audio_generation',
-        description: "This subnetwork is a decentralized system designed for text-to-audio applications within the Bittensor network. It consists of validators and miners that work collaboratively to produce high-quality audio from the provided prompts. We'll start with text-to-speech (TTS) in the first phase and work simultaneously to add music generation in future updates."
+        creator: 'FirstTensor',
+        name: "BitAds",
+        url: '',
+        description: "BitAds introduces a revolutionary approach to online advertising through a decentralized network built on Bittensor. Aiming to disrupt the traditional advertising industry, BitAds offers a solution that significantly reduces costs for clients while incentivizing miners to promote and drive organic traffic to advertising campaigns.s"
     },
     {
         netuid: 17,
         image: subnetImageSeventeen,
         creator: 'UncleTed',
-        name: "Flavia",
+        name: "404",
         url: '',
-        description: "The Flavia project within Bittensor subnet 17 provides distributed model inference, improving distributed computing through efficiency and scalability. It leverages a network of nodes, each contributing to a robust and resilient inference process with no single point of failure. The adaptability of subnets allows you to manage a variety of computational requirements. Flavia democratizes advanced model inference, making it accessible without extensive hardware investments. These innovations are at the heart of a data-driven world that fosters collaborative digital ecosystems."
+        description: "As the 3D generation subnet, 404 provides a platform to democratize 3D content creation, ultimately allowing anyone to create virtual worlds, games and AR/VR/XR experiences. We leverage the existing fragmented and diverse landscape of open-source 3D content generation models - ranging from Gaussian Splatting, Neural Radiance Fields, and 3D Diffusion Models - to facilitate innovation. This is an ideal landscape in which to construct decentralized incentive-based networks via Bittensor."
     },
     {
         netuid: 18,
@@ -232,7 +224,7 @@ export const items = [
         image: subnetImageTwentyFour,
         creator: 'BittensorGuru',
         name: "OMEGA",
-        url: '',
+        url: 'omega',
         description: "OMEGA Labs, evolving from the success of WOMBO, embarks on an AGI-focused journey, leveraging the OMEGA Bittensor subnet and the Tao community to create the world's largest decentralized multimodal dataset for groundbreaking AI research."
     },
     {
@@ -286,10 +278,10 @@ export const items = [
     {
         netuid: 31,
         image: subnetImageThirtyOne,
-        creator: 'bthealthcare',
-        name: "Healthcare",
-        url: 'healthcare',
-        description: "Bittensor Subnet 31, known as Healthcare-Subnet, aims to revolutionize medical diagnostics using AI. We focus on strengthening disease diagnosis through medical image analysis and aim to evolve into an AI-based comprehensive healthcare system. Miners and validators play important roles. Miners use AI to analyze medical images, and verifiers ensure the reliability and accuracy of these AI models. Subnet emphasizes collaboration with medical experts and data scientists and is currently developing a user-friendly mobile app that will provide easy access to AI-based diagnostics. The long-term vision includes expanding diagnostic capabilities and integrating advanced patient data analytics technologies for a global AI-based healthcare system."
+        creator: 'mutex::lock',
+        name: "NAS chain",
+        url: '',
+        description: "NASChain streamlines Neural Architecture Search (NAS) by distributing the design process across the Bittensor network. This decentralized method accelerates the discovery of efficient neural networks, optimizing for accuracy and computational cost, while reducing the traditionally high resource and time requirements."
     },
     {
         netuid: 32,
