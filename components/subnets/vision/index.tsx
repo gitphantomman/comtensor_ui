@@ -89,7 +89,7 @@ const Vison = () => {
         <img src="images/subnets/subnet-19.webp" alt="Logo" className="w-60 h-60 rounded-full" />
       </div>
       <main className="flex flex-grow">
-        <aside className="w-1/4 p-4 transparent mt-12">
+        <aside className="w-1/4 p-4 transparent mt-12 text-white dark:text">
           <ul className="space-y-2">
             <li>
               <button
@@ -122,11 +122,11 @@ const Vison = () => {
                   id="prompt"
                   type="text"
                   onChange={handleInputChange}
-                  className="w-3/5 px-4 py-4 rounded-xl bg-gray-100 border"
+                  className="w-3/5 px-4 py-4 rounded-xl bg-gray-100 text-black border"
                 />
                 <button
                   type="submit"
-                  className="px-2 py-4 w-1/4 rounded-xl bg-pink-800 hover:bg-pink-700"
+                  className="px-2 py-4 w-1/4 rounded-xl bg-pink-800 text-white hover:bg-pink-700"
                 >
                   Generate(txt2img)
                 </button>
@@ -138,7 +138,7 @@ const Vison = () => {
                 <input
                   type="file"
                   onChange={handleFileChange}
-                  className="w-full px-4 py-4 rounded-xl transparent border"
+                  className="w-full px-4 py-4 rounded-xl transparent text-black border"
                 />
               </div>
               <div className="mt-4 text-black dark:text-black space-x-12">
@@ -146,13 +146,13 @@ const Vison = () => {
                   id="prompt"
                   type="text"
                   onChange={handleInputChange}
-                  className="w-full py-4 rounded-xl transparent border bg-gray-100"
+                  className="w-full py-4 rounded-xl transparent text-black border bg-gray-100"
                 />
               </div>
               <div>
                 <button
                   type="submit"
-                  className="px-2 py-4 w-1/4 rounded-xl bg-pink-800 hover:bg-pink-700"
+                  className="px-2 py-4 w-1/4 rounded-xl bg-pink-800 text-white hover:bg-pink-700"
                 >
                   Generate(img2img)
                 </button>

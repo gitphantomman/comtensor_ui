@@ -1,75 +1,122 @@
 "use client"
-import { useRef, useState, useEffect } from "react";
-import ResultData from "./result-data";
-import Loading from "../loading";
 
-const testData = [
-    {
-        content: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. ",
-    },
-    {
-        content: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. ",
-    },
-    {
-        content: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. ",
-    },
-    {
-        content: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. ",
-    },
-    {
-        content: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. ",
-    },
-]
+import React, { useState } from 'react';
+import axios from 'axios';
+import Spinner from '../Spinner';
 
-const MultiModality = () => {
-    const inputRef = useRef<HTMLInputElement|null>(null);
-    const [inputVal, setInputValue] = useState<string>('');
+type FormEventHandler<T> = (event: React.FormEvent<T>) => void;
+
+const MultiModal: React.FC = () => {
+
+    const [inputValue, setInputValue] = useState('');
+    const [model, setModel] = useState<string | null>(null);
+    const [ResponseData, setResponseData] = useState('');
     const [loading, setLoading] = useState<boolean>(false);
-    const [resultData, setResultData] = useState<any>([]);
+    const [error, setError] = useState('');
 
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setInputValue(event.target.value);
+        console.log(inputValue);
+    };
 
-    useEffect(() => {
-        function handleKeyPress(event: KeyboardEvent) {
-            if (event.key === 'Enter') {
-                searchData();
-            }
-         }
-         
-         const inputElement = inputRef.current!;
-   
-         if(inputElement) {
-            inputElement.addEventListener('keypress', handleKeyPress);
-   
-            return () => {
-               inputElement.removeEventListener('keypress', handleKeyPress);
-            };
-         }
-    }, [inputVal]);
+    const handleModelChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setModel(event.target.value);
+    };
 
-    const  searchData = async () => {
+    const handleFormSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+        event.preventDefault();
+        if (!inputValue) {
+            setError('Please enter a Search Query');
+            return;
+        }
+
+        if (!model) {
+            setError("Please select a model.");
+            return;
+        }
+
         setLoading(true);
-        await new Promise((resolve) => setTimeout(resolve, 3000));
-        setResultData(testData);
-        setLoading(false);
-    }
+        setError('');
+        setResponseData('');
 
+        try {
+            await axios.post(
+                "https://api.comtensor.io/sybil/",
+                {
+                    sources: model,
+                    query: inputValue,
+                },
+                {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                }
+            )
+                .then(response => {
+                    const data = response.data[0].completion;
+                    setResponseData(data);
+                    setLoading(false);
+                }
+                )
+                .catch(error => {
+                    setLoading(false);
+                    console.error('Error sending POST request:', error);
+                });
+
+        } catch (error) {
+            setLoading(false);
+            console.error('Error sending POST request:', error);
+        }
+    };
 
     return (
-        <div className="mt-[40px]">
-            {
-                loading && (
-                    <Loading/>
-                )
-            }
-            <input ref={inputRef} value={inputVal} onChange={(e) => setInputValue(e.target.value)}  disabled={loading}
-                className="w-full bg-gray-500 py-5 px-3 rounded-xl outline-none 
-                    hover:bg-[#303846] focus:bg-[#303846] focus:border-primary duration-300 transition-all "
-                type="text" placeholder="Type and press enter..."
-            />
-            <ResultData data={resultData}/>
-        </div>
-    )
-}
+        <div className="min-h-screen flex items-center justify-center"
+        >
+            <form className="bg-transparent p-6 rounded-lg shadow-md w-[600px]" onSubmit={handleFormSubmit}>
+                <div className="flex items-center transparent justify-center">
+                    <img src="images/subnets/subnet-4.webp" alt="Logo" className="w-60 h-60 rounded-full" />
+                </div>
+                <h1 className="text-5xl font-bold mb-4 text-center mt-4">Multi Modality</h1>
+                <h2 className="text-2xl font-bold mb-4 text-center mt-4">Decentralized ML search engine capturing meaning from text & images.</h2>
 
+                <div className="flex flex-col space-y-4">
+                    <select
+                        value={model ?? ""}
+                        onChange={handleModelChange}
+                        className="rounded-sm px-12 py-4 bg-transparent w-full text-white"
+                    >
+                        <option value="" disabled={loading} className='text-black'>
+                            Select a model
+                        </option>
+                        <option value="google" className='text-black rounded-md py-4'>Google</option>
+                        <option value="bing" className='text-black rounded-md py-4'>Bing</option>
+                        <option value="yahoo" className='text-black rounded-md py-4'>Yahoo</option>
+                    </select>
+                    <input
+                        type="text"
+                        value={inputValue}
+                        onChange={handleInputChange}
+                        className="rounded-sm px-12 py-4 bg-transparent w-full text-white"
+                        placeholder="Please enter a Search Query"
+                    />
+                    {error && <p className="text-red-500 mt-2">{error}</p>}
+                    <button type="submit" className='flex items-center justify-center w-full text-2xl bg-pink-800 rounded-full hover:bg-pink-700 py-4'>
+                        {loading ? 'Loading...' : 'Search'}
+                    </button>
+                </div>
+                {
+                    loading ? (
+                        <Spinner />
+                    ) : (
+                        <div className="mt-12 bg-gray-100 p-4 rounded text-white bg-transparent rounded-md text-2xl">
+                            {ResponseData || (loading ? 'Loading...' : 'Search Result will appear here')}
+                        </div>
+                    )
+                }
+            </form >
+        </div >
+    );
+};
 
-export default MultiModality;
+export default MultiModal;
