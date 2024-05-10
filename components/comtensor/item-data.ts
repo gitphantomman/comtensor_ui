@@ -192,7 +192,7 @@ export const items = [
         image: subnetImageTwenty,
         creator: 'Rogue Tensor',
         name: "Bit Agent",
-        url: '',
+        url: 'bitagent',
         description: "Bittensor Subnet 20, known as BitAgent, focuses on two key areas: Q&A/Actions and Integration Orchestration. Q&A/Tasking includes real-time data analysis, summarization, logic-based reasoning, and tool execution. Integrated orchestration includes natural language-based task completion in applications such as browser plug-ins for simplified web interactions and data filtering. Future vision includes consolidating other subnets for advanced features. Key features of the development include a Discord bot, web and form filler applications, browser plugins, and a miner that provides feedback and requires a low barrier to entry. This subnet aims to provide cutting-edge features with a focus on accessibility and real-world applications."
     },
     {
@@ -216,7 +216,7 @@ export const items = [
         image: subnetImageTwentyThree,
         creator: 'MrNiche',
         name: "NicheImage",
-        url: '',
+        url: 'niche_image',
         description: "The goal of the NicheImage subnet is to have the best image creation models for a variety of use cases and to provide efficient and affordable inference for businesses looking for image creation services."
     },
     {
@@ -240,7 +240,7 @@ export const items = [
         image: subnetImageTwentySix,
         creator: 'Emperor Wang',
         name: "Image Alchemy",
-        url: '',
+        url: 'image_aichemy',
         description: "Bittensor Subnet 26 aims to revolutionize image processing and creation through decentralized AI technology. We focus on creating high-quality, innovative visual content using advanced machine learning models leveraging the Bittensor network. This approach enables a collaborative and transparent ecosystem for artists and developers, improving the creativity and accessibility of digital images. Image Alchemy represents an important step forward in combining AI and artistic expression to push the boundaries of what is possible in digital art and image compositing."
     },
     {
