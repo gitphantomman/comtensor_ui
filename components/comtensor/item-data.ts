@@ -246,7 +246,7 @@ export const items = [
     {
         netuid: 27,
         image: subnetImageTwentySeven,
-        creator: 'Neural Internet',
+        creator: 'Neural Internet', 
         name: "Compute",
         url: '',
         description: "This subnet aims to enhance distributed computing capabilities with a focus on improving the efficiency and scalability of AI computation. Leverage the Bittensor framework to drive collaborative computing power across distributed networks and support the execution of sophisticated AI models and tasks. The project emphasizes creating a more accessible and powerful computing platform for AI development in a distributed environment."
