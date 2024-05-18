@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Spinner from '../Spinner';
-import backgroundImage from '@/public/images/transcription.jpg';
 
 type FormEventHandler<T> = (event: React.FormEvent<T>) => void;
 

@@ -88,7 +88,7 @@ export const items = [
         image: subnetImageSeven,
         creator: '',
         name: "SubVortex",
-        url: '',
+        url: 'subvortex',
         description: "SubVortex introduces a network of incentivized, decentralized Subtensor nodes that are integral to the Bittensor ecosystem, aiming to improve the overall functionality and governance of the network by promoting decentralization, stability, and efficient resource deployment."
     },
     {
@@ -248,7 +248,7 @@ export const items = [
         image: subnetImageTwentySeven,
         creator: 'Neural Internet', 
         name: "Compute",
-        url: '',
+        url: 'compute',
         description: "This subnet aims to enhance distributed computing capabilities with a focus on improving the efficiency and scalability of AI computation. Leverage the Bittensor framework to drive collaborative computing power across distributed networks and support the execution of sophisticated AI models and tasks. The project emphasizes creating a more accessible and powerful computing platform for AI development in a distributed environment."
     },
     {
