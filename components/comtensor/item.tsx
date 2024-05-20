@@ -10,10 +10,12 @@ type ComtensorItemType = {
     name: string;
     url: string;
     description: string;
+    badge : string,
+    badgeColor : string,
 }
 
 
-const ComtensorItem = ({ creator, netuid, image, name, url, description }:ComtensorItemType) => {
+const ComtensorItem = ({ creator, netuid, image, name, url, description,  badge, badgeColor }:ComtensorItemType) => {
 
 
     return (
@@ -33,6 +35,9 @@ const ComtensorItem = ({ creator, netuid, image, name, url, description }:Comten
                         {description}
                     </p>
                     <div className="mt-1 flex justify-end gap-1.5 text-[#DfEAED] text-xs">by: <span className="text-primary">{creator}</span></div>
+                </div>
+                <div className={`absolute top-2 right-2 px-2 py-1 rounded-full text-xs text-white border border-green-300`} style={{ backgroundColor: badgeColor }}>
+                    {badge}
                 </div>
             </div>
         </div>
