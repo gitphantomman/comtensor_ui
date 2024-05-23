@@ -1,136 +1,130 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { format } from 'date-fns';
-import Spinner from '../Spinner';
-
-type FormEventHandler<T> = (event: React.FormEvent<T>) => void;
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ReferenceLine } from 'recharts';
 
 const SnOracle: React.FC = () => {
+    const [snData, setSnData] = useState<{ time: string; value: number }[]>([]);
+    const [error, setError] = useState<string | null>(null);
 
-    const [snData, setSnData] = useState(['']);
-    const [time, setTime] = useState('');
-    const [loading, setLoading] = useState<boolean>(false);
-
-    const handleFormSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
-        event.preventDefault();
-
-        setLoading(true);
-        setSnData(['']);
-
+    const fetchData = async () => {
+        setError(null);
         try {
-            await axios.post(
+            const response = await axios.post(
                 "https://api.comtensor.io/snporacle/",
+                {},
                 {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
                     },
                 }
-            )
-                .then(response => {
-                    const data = response.data[0].prediction;
-                    const time: string = response.data[0].timestamp;
-                    const date: Date = new Date(time);
-                    const day: string = date.getDate().toString().padStart(2, '0'); 
-                    const month: string = (date.getMonth() + 1).toString().padStart(2, '0'); 
-                    const year: string = date.getFullYear().toString(); 
-                    
-                    const formattedDate: string = `${day}-${month}-${year}`;
-                    setSnData(data);
-                    setTime(formattedDate);
-                    setLoading(false);
-                }
-                )
-                .catch(error => {
-                    setLoading(false);
-                    console.error('Error sending POST request:', error);
-                });
+            );
 
+            const data = response.data[0].prediction;
+            const time = response.data[0].timestamp;
+            const date = new Date(time);
+            const formattedDate = `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear().toString()}`;
+
+            const newPoint = { time: formattedDate, value: data[4] };
+            setSnData(prevData => [...prevData, newPoint]);
         } catch (error) {
-            setLoading(false);
             console.error('Error sending POST request:', error);
+            setError('An error occurred while fetching data. Please try again later.');
         }
     };
 
-    return (
-        <div className="min-h-screen flex items-center justify-center"
-        >
-            <form className="bg-transparent p-6 rounded-lg shadow-md w-[600px]" onSubmit={handleFormSubmit}>
-                <div className="flex items-center transparent justify-center">
-                    <img src="images/subnets/subnet-28.webp" alt="Logo" className="w-60 h-60 rounded-full" />
-                </div>
-                <h1 className="text-5xl font-bold mb-4 text-center mt-4">S&P 500 Oracle</h1>
-                <h2 className="text-2xl font-bold mb-4 text-center mt-4">Foundry S&P 500 Oracle incentivizes price predictions.</h2>
+    useEffect(() => {
+        const interval = setInterval(fetchData, 5000);
+        return () => clearInterval(interval);
+    }, []);
 
-                <div className="flex flex-col space-y-4">
-                    <span>The Standard and Poor's 500, or simply the S&P 500, is a stock market index tracking the stock performance of 500 of the largest companies listed on stock exchanges in the United States.</span>
-                    <button type="submit" className='flex items-center justify-center w-full text-2xl bg-pink-800 rounded-full hover:bg-pink-700 py-4'>
-                        {loading ? 'Loading...' : 'Search'}
-                    </button>
-                </div>
-                {
-                    loading ? (
-                        <Spinner />
-                    ) : (
-                        <div className="mt-12 p-4 rounded-sm text-white w-full bg-transparent rounded-md text-2xl">
-                            <ul className="flex flex-col bg-purple-800 p-4 rounded-md">
-                                <li className="border-gray-400 flex flex-row mb-2">
-                                    <div className="select-none cursor-pointer bg-purple-900 rounded-md flex flex-1 items-center p-4  transition duration-500 ease-in-out transform hover:-translate-y-1 hover:shadow-lg">
-                                        <div className="flex flex-col rounded-md w-10 h-10 bg-purple-800 justify-center items-center mr-4">💰</div>
-                                        <div className="flex-1 pl-1 mr-16">
-                                            <div className="font-medium">Prediction</div>
-                                            <div className="text-white text-sm">{snData[0]}</div>
-                                        </div>
-                                        <div className="text-white text-xs">{time}</div>
-                                    </div>
-                                </li>
-                                <li className="border-gray-400 flex flex-row mb-2">
-                                    <div className="select-none cursor-pointer bg-purple-900 rounded-md flex flex-1 items-center p-4  transition duration-500 ease-in-out transform hover:-translate-y-1 hover:shadow-lg">
-                                        <div className="flex flex-col rounded-md w-10 h-10 bg-purple-800 justify-center items-center mr-4">💰</div>
-                                        <div className="flex-1 pl-1 mr-16">
-                                            <div className="font-medium">Prediction</div>
-                                            <div className="text-white text-sm">{snData[1]}</div>
-                                        </div>
-                                        <div className="text-white text-xs">{time}</div>
-                                    </div>
-                                </li>
-                                <li className="border-gray-400 flex flex-row mb-2">
-                                    <div className="select-none cursor-pointer bg-purple-900 rounded-md flex flex-1 items-center p-4  transition duration-500 ease-in-out transform hover:-translate-y-1 hover:shadow-lg">
-                                        <div className="flex flex-col rounded-md w-10 h-10 bg-purple-800 justify-center items-center mr-4">💰</div>
-                                        <div className="flex-1 pl-1 mr-16">
-                                            <div className="font-medium">Prediction</div>
-                                            <div className="text-white text-sm">{snData[2]}</div>
-                                        </div>
-                                        <div className="text-white text-xs">{time}</div>
-                                    </div>
-                                </li>
-                                <li className="border-gray-400 flex flex-row mb-2">
-                                    <div className="select-none cursor-pointer bg-purple-900 rounded-md flex flex-1 items-center p-4  transition duration-500 ease-in-out transform hover:-translate-y-1 hover:shadow-lg">
-                                        <div className="flex flex-col rounded-md w-10 h-10 bg-purple-800 justify-center items-center mr-4">💰</div>
-                                        <div className="flex-1 pl-1 mr-16">
-                                            <div className="font-medium">Prediction</div>
-                                            <div className="text-white text-sm">{snData[3]}</div>
-                                        </div>
-                                        <div className="text-white text-xs">{time}</div>
-                                    </div>
-                                </li>
-                                <li className="border-gray-400 flex flex-row mb-2">
-                                    <div className="select-none cursor-pointer bg-purple-900 rounded-md flex flex-1 items-center p-4  transition duration-500 ease-in-out transform hover:-translate-y-1 hover:shadow-lg">
-                                        <div className="flex flex-col rounded-md w-10 h-10 bg-purple-800 justify-center items-center mr-4">💰</div>
-                                        <div className="flex-1 pl-1 mr-16">
-                                            <div className="font-medium">Prediction</div>
-                                            <div className="text-white text-sm">{snData[4]}</div>
-                                        </div>
-                                        <div className="text-white text-xs">{time}</div>
-                                    </div>
-                                </li>
-                            </ul>
+    const lastSevenData = snData.slice(-12);
+
+    const calculateAverage = (data: any[]) => {
+        if (data.length === 0) return 0;
+        const sum = data.reduce((acc, point) => acc + point.value, 0);
+        return sum / data.length;
+    };
+
+    const averageValue = calculateAverage(lastSevenData);
+
+    const getMinMax = (data: any[]) => {
+        const values = data.map(d => d.value);
+        const min = Math.min(...values);
+        const max = Math.max(...values);
+        return [Math.floor(min), Math.ceil(max)];
+    };
+
+    const [minY, maxY] = getMinMax(lastSevenData);
+
+    return (
+        <div className="mt-12 items-center justify-center">
+            <div className="flex items-center justify-center mt-12 p-4 rounded-sm text-white w-full bg-transparent rounded-md text-2xl">
+                <header className="mt-24 flex flex-col items-center justify-center gap-4 md:flex-row md:items-stretch lg:gap-x-8">
+                    <div className="relative shrink-0 w-32 h-32 aspect-square rounded-[2rem] overflow-hidden md:w-36 md:h-36">
+                        <img src="images/subnets/Subnet_Mark/subnet-28.webp" style={{ position: 'absolute', height: '100%', width: '100%', inset: 0, color: 'transparent', visibility: 'visible' }} />
+                    </div>
+                    <div className="relative text-center gap-2 justify-between pt-11 lg:pt-0 lg:justify-start flex flex-col w-full md:text-left">
+                        <div className="flex flex-col md:flex-row items-center md:items-end space-y-2 md:space-y-0">
+                            <h1 className="text-t-textLight text-2xl md:text-5xl lg:text-8xl font-bold">S&P 500 Oracle</h1>
                         </div>
-                    )
-                }
-            </form >
+                        <p className="text-t-primary font-light lg:text-base">Foundry S&P 500 Oracle incentivizes price predictions.</p>
+                    </div>
+                </header>
+            </div>
+            <div className='flex flex-col mt-12 gap-y-12 lg:gap-y-24 gap-x-24 items-start justify-center'>
+                <div className='w-full grid gap-y-8'>
+                    <span className="font-semibold text-3xl text-t-textLight">What is Subnet 28 about?</span>
+                    <span className="font-semibold text-xl text-t-textLight">Foundry is launching Foundry S&P 500 Oracle to incentivize miners to make predictions on the S&P 500 price frequently throughout trading hours. Validators send miners a timestamp (a future time) for which the miners need to make an S&P 500 price prediction for. Miners need to respond with their prediction for the price of the S&P 500 at the given time. Validators store the miner predictions, and then calculate the scores of the miners after the predictions mature. Miners are ranked against eachother, naturally incentivizing competition between the miners.</span>
+                </div>
+                <div className='w-full grid gap-y-8'>
+                    <div className="grid grid-flow-row text-t-body grid-cols-2 md:grid-cols-4 gap-5">
+                        <div className="flex gap-5 flex-col justify-between rounded border border-t-bg03 bg-t-bg02 p-4 px-6">
+                            <span className="text-sm text-t-textLight uppercase">Emissions</span>
+                            <span className="text-xl font-medium">2.842 %</span>
+                        </div>
+                        <div className="flex gap-5 flex-col justify-between rounded border border-t-bg03 bg-t-bg02 p-4 px-6">
+                            <span className="text-sm text-t-textLight uppercase">Reg cost</span>
+                            <span className="text-xl font-medium">1.000 τ</span>
+                        </div>
+                        <div className="flex gap-5 flex-col justify-between rounded border border-t-bg03 bg-t-bg02 p-4 px-6">
+                            <span className="text-sm text-t-textLight uppercase">Regs enabled</span>
+                            <span className="text-xl font-medium">
+                                <span className="text-t-primary">YES</span>
+                            </span>
+                        </div>
+                        <div className="flex gap-5 flex-col justify-between rounded border border-t-bg03 bg-t-bg02 p-4 px-6">
+                            <span className="text-sm text-t-textLight uppercase">Subnet owner</span>
+                            <a target="_blank" rel="noreferrer" className="text-t-body flex gap-1 hover:text-t-hover" href="https://x.taostats.io/account/5CiQ1cxLB1ABBJyf9FAR8CRhfcKgs4M8QaRgmHh318PKLqvb#transfers">
+                                <span className="text-xl overflow-x-hidden font-medium">5ChuGqW2cxc5...</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div className="mt-12 flex items-center justify-center">
+                {error ? (
+                    <div>{error}</div>
+                ) : (
+                    <div style={{ width: '90%', height: 500 }}>
+                        <ResponsiveContainer>
+                            <LineChart data={lastSevenData}>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="time" />
+                                <YAxis domain={[minY, maxY]} />
+                                <Tooltip />
+                                <Legend />
+                                <Line type="monotone" dataKey="value" stroke="red" strokeWidth={2} dot={{ r: 3 }} />
+                                <ReferenceLine y={averageValue} label={`Avg: ${averageValue.toFixed(2)}`} stroke="green" strokeWidth={2} strokeDasharray="3 3" />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    </div>
+                )}
+            </div>
         </div>
+
     );
 };
 
