@@ -115,7 +115,6 @@ const Compute: React.FC = () => {
                                 </>
                             )
                         }
-                        
                         <div className='flex justify-around text-2xl mt-12 space-x-12'>
                             <input type="number" className='w-1/4 border rounded-md border-gray-200 bg-transparent px-4 py-4' name="" id="" max={13} min={5} onChange={handleInputChange} placeholder='Be sure to enter a number from 6 to 12.' />
                             <input type="submit" className='w-1/4 border border-gray-200 rounded-md bg-pink-800 px-4 py-4 hover:bg-pink-700' value="Submit" />

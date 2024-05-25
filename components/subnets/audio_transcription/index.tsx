@@ -34,7 +34,7 @@ const AudioTranscriptionApp: React.FC = () => {
         "https://api.comtensor.io/transcription/",
         {
           type: 'url',
-          audio_url: inputValue,
+          audio_url: inputValue, 
           audio_sample: ""
         },
         {

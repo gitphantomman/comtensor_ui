@@ -22,7 +22,6 @@ const ItsAi = () => {
     const handleFormSubmit: FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault();
         setLoading(true);
-
         try {
             axios.post(
                 'https://api.comtensor.io/itsai/',
