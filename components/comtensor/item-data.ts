@@ -7,7 +7,7 @@ import subnetImageSix from '@/public/images/subnets/subnet-6-banner.webp';
 import subnetImageSeven from '@/public/images/subnets/subnet-7-banner.webp';
 import subnetImageEight from '@/public/images/subnets/subnet-8-banner.webp';
 import subnetImageNine from '@/public/images/subnets/subnet-9-banner.webp';
-import subnetImageTen from '@/public/images/subnets/subnet-10-banner (1).webp';
+import subnetImageTen from '@/public/images/subnets/subnet-10-banner.webp';
 import subnetImageEleven from '@/public/images/subnets/subnet-11-banner.webp';
 import subnetImageTwelve from '@/public/images/subnets/subnet-12-banner.webp';
 import subnetImageThirteen from '@/public/images/subnets/subnet-13-banner.webp';
@@ -139,7 +139,7 @@ export const items = [
         image: subnetImageTen,
         creator: 'TechButcher',
         name: "Sturdy",
-        url: 'Sturdy',
+        url: 'sturdy',
         description: "Sturdy Subnet is a Bittensor subnetwork that enables the creation of decentralized, autonomous yield optimizers.",
         badge : "New Reg",
         badgeColor : "#f59042",
@@ -348,7 +348,7 @@ export const items = [
         image: subnetImageTwentyNine,
         creator: '404',
         name: "Fractal Research",
-        url: '',
+        url: 'fractal',
         description: "Fractal's Text-to-Video Generation Grid leverages deterministic verification in a decentralized node grid to optimize text-to-video inference with minimal latency, featuring a unique gamification-resistant mechanism to ensure integrity and efficiency.",
         badge : "In progress",
         badgeColor : "#b52d61",
@@ -399,7 +399,7 @@ export const items = [
         applink : "https://conversations.xyz/"
     },
     {
-        netuid: 33,
+        netuid: 34,
         image: subnetImageThirtyFour,
         creator: '404',
         name: "Healthi",
